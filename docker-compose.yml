@@ -12,7 +12,7 @@ services:
       - "5432:5432"
 
   web:
-    build: ./crawler
+    build: ./web
     depends_on:
         - db
     networks:
@@ -20,7 +20,7 @@ services:
     ports:
         - "5000:5000"
     volumes:
-        - ./crawler:/usr/src/app
+        - ./web:/usr/src/app
 
 networks:
   backend:
