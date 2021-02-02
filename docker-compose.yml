@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  db:
+    build: ./db
+    container_name: pg49
+    networks:
+      - backend
+    # volumes:
+    #   - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: ./crawler
+    depends_on:
+        - db
+    networks:
+        - backend
+    ports:
+        - "5000:5000"
+    volumes:
+        - ./crawler:/usr/src/app
+
+networks:
+  backend:
+    name: pg-net
+    driver: bridge
